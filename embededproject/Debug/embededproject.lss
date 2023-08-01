@@ -1,0 +1,327 @@
+
+embededproject.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000190  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  000001e4  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  000001e4  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000214  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 000000b0  00000000  00000000  00000250  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000a79  00000000  00000000  00000300  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000007ca  00000000  00000000  00000d79  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000526  00000000  00000000  00001543  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000f0  00000000  00000000  00001a6c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000003f1  00000000  00000000  00001b5c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000024d  00000000  00000000  00001f4d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000070  00000000  00000000  0000219a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 81 00 	call	0x102	; 0x102 <main>
+  64:	0c 94 c6 00 	jmp	0x18c	; 0x18c <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <DIO_Init>:
+	//CLEARBIT(DDRB,0);
+	//CLEARBIT(DDRB,4);
+	//CLEARBIT(DDRD,2);
+	
+	//LCD Outputs
+	SETBIT(DDRD,0);  
+  6c:	81 b3       	in	r24, 0x11	; 17
+  6e:	81 60       	ori	r24, 0x01	; 1
+  70:	81 bb       	out	0x11, r24	; 17
+	SETBIT(DDRD,1);
+  72:	81 b3       	in	r24, 0x11	; 17
+  74:	82 60       	ori	r24, 0x02	; 2
+  76:	81 bb       	out	0x11, r24	; 17
+	SETBIT(DDRD,4);
+  78:	81 b3       	in	r24, 0x11	; 17
+  7a:	80 61       	ori	r24, 0x10	; 16
+  7c:	81 bb       	out	0x11, r24	; 17
+	SETBIT(DDRD,5);
+  7e:	81 b3       	in	r24, 0x11	; 17
+  80:	80 62       	ori	r24, 0x20	; 32
+  82:	81 bb       	out	0x11, r24	; 17
+	SETBIT(DDRD,6);
+  84:	81 b3       	in	r24, 0x11	; 17
+  86:	80 64       	ori	r24, 0x40	; 64
+  88:	81 bb       	out	0x11, r24	; 17
+	SETBIT(DDRD,7);
+  8a:	81 b3       	in	r24, 0x11	; 17
+  8c:	80 68       	ori	r24, 0x80	; 128
+  8e:	81 bb       	out	0x11, r24	; 17
+  90:	08 95       	ret
+
+00000092 <lcdcmd>:
+ */ 
+
+#include "LCD.h"
+void lcdcmd(unsigned char c)
+{
+	PORTD=c;
+  92:	82 bb       	out	0x12, r24	; 18
+	PORTC &=~(0x01);
+  94:	85 b3       	in	r24, 0x15	; 21
+  96:	8e 7f       	andi	r24, 0xFE	; 254
+  98:	85 bb       	out	0x15, r24	; 21
+	PORTC &=~(0x02);
+  9a:	85 b3       	in	r24, 0x15	; 21
+  9c:	8d 7f       	andi	r24, 0xFD	; 253
+  9e:	85 bb       	out	0x15, r24	; 21
+	PORTC |=(0x04);
+  a0:	85 b3       	in	r24, 0x15	; 21
+  a2:	84 60       	ori	r24, 0x04	; 4
+  a4:	85 bb       	out	0x15, r24	; 21
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  a6:	83 ec       	ldi	r24, 0xC3	; 195
+  a8:	99 e0       	ldi	r25, 0x09	; 9
+  aa:	01 97       	sbiw	r24, 0x01	; 1
+  ac:	f1 f7       	brne	.-4      	; 0xaa <lcdcmd+0x18>
+  ae:	00 c0       	rjmp	.+0      	; 0xb0 <lcdcmd+0x1e>
+  b0:	00 00       	nop
+	_delay_ms(10);
+	PORTC &=~(0x04);
+  b2:	85 b3       	in	r24, 0x15	; 21
+  b4:	8b 7f       	andi	r24, 0xFB	; 251
+  b6:	85 bb       	out	0x15, r24	; 21
+  b8:	08 95       	ret
+
+000000ba <lcddata>:
+	
+}
+void lcddata(unsigned char d)
+{
+	PORTD=d;
+  ba:	82 bb       	out	0x12, r24	; 18
+	PORTC |=(0x01);
+  bc:	85 b3       	in	r24, 0x15	; 21
+  be:	81 60       	ori	r24, 0x01	; 1
+  c0:	85 bb       	out	0x15, r24	; 21
+	PORTC &=~(0x02);
+  c2:	85 b3       	in	r24, 0x15	; 21
+  c4:	8d 7f       	andi	r24, 0xFD	; 253
+  c6:	85 bb       	out	0x15, r24	; 21
+	PORTC |=(0x04);
+  c8:	85 b3       	in	r24, 0x15	; 21
+  ca:	84 60       	ori	r24, 0x04	; 4
+  cc:	85 bb       	out	0x15, r24	; 21
+  ce:	83 ec       	ldi	r24, 0xC3	; 195
+  d0:	99 e0       	ldi	r25, 0x09	; 9
+  d2:	01 97       	sbiw	r24, 0x01	; 1
+  d4:	f1 f7       	brne	.-4      	; 0xd2 <lcddata+0x18>
+  d6:	00 c0       	rjmp	.+0      	; 0xd8 <lcddata+0x1e>
+  d8:	00 00       	nop
+	_delay_ms(10);
+	PORTC &=~(0x04);
+  da:	85 b3       	in	r24, 0x15	; 21
+  dc:	8b 7f       	andi	r24, 0xFB	; 251
+  de:	85 bb       	out	0x15, r24	; 21
+  e0:	08 95       	ret
+
+000000e2 <LCD_VidInit>:
+	
+	// initialization steps as Data sheet
+	//Dio_VidWritePin(PB,E_PIN,LOW);
+	//_delay_ms(15);
+
+	lcdcmd(0x38);
+  e2:	88 e3       	ldi	r24, 0x38	; 56
+  e4:	0e 94 49 00 	call	0x92	; 0x92 <lcdcmd>
+	lcdcmd(0x06);
+  e8:	86 e0       	ldi	r24, 0x06	; 6
+  ea:	0e 94 49 00 	call	0x92	; 0x92 <lcdcmd>
+	lcdcmd(0x80);
+  ee:	80 e8       	ldi	r24, 0x80	; 128
+  f0:	0e 94 49 00 	call	0x92	; 0x92 <lcdcmd>
+	lcdcmd(0x0e);
+  f4:	8e e0       	ldi	r24, 0x0E	; 14
+  f6:	0e 94 49 00 	call	0x92	; 0x92 <lcdcmd>
+	lcdcmd(0x01);
+  fa:	81 e0       	ldi	r24, 0x01	; 1
+  fc:	0e 94 49 00 	call	0x92	; 0x92 <lcdcmd>
+ 100:	08 95       	ret
+
+00000102 <main>:
+
+int main(void)
+{
+	char Tdata = 'a';
+	char Rdata;
+	DIO_Init();
+ 102:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_Init>
+	LCD_VidInit();
+ 106:	0e 94 71 00 	call	0xe2	; 0xe2 <LCD_VidInit>
+	
+	SPI_VidInt(SLAVE);
+ 10a:	81 e0       	ldi	r24, 0x01	; 1
+ 10c:	0e 94 97 00 	call	0x12e	; 0x12e <SPI_VidInt>
+#include "LCD.h"
+
+
+int main(void)
+{
+	char Tdata = 'a';
+ 110:	c1 e6       	ldi	r28, 0x61	; 97
+	
+	SPI_VidInt(SLAVE);
+	
+	while(1)
+	{
+		Rdata = SPI_TransRec(Tdata);
+ 112:	8c 2f       	mov	r24, r28
+ 114:	0e 94 c1 00 	call	0x182	; 0x182 <SPI_TransRec>
+ 118:	d8 2f       	mov	r29, r24
+		lcdcmd(0x80);
+ 11a:	80 e8       	ldi	r24, 0x80	; 128
+ 11c:	90 e0       	ldi	r25, 0x00	; 0
+ 11e:	0e 94 49 00 	call	0x92	; 0x92 <lcdcmd>
+		lcddata(Rdata);
+ 122:	8d 2f       	mov	r24, r29
+ 124:	90 e0       	ldi	r25, 0x00	; 0
+ 126:	0e 94 5d 00 	call	0xba	; 0xba <lcddata>
+		
+		Tdata+=1;
+ 12a:	cf 5f       	subi	r28, 0xFF	; 255
+ 12c:	f2 cf       	rjmp	.-28     	; 0x112 <main+0x10>
+
+0000012e <SPI_VidInt>:
+#include "SPI.h"
+
+void SPI_VidInt(SPIMODE_t mode)
+{
+	if (mode == MASTER)
+ 12e:	81 11       	cpse	r24, r1
+ 130:	13 c0       	rjmp	.+38     	; 0x158 <SPI_VidInt+0x2a>
+	{
+		SETBIT(DDRB,4);   //SS
+ 132:	87 b3       	in	r24, 0x17	; 23
+ 134:	80 61       	ori	r24, 0x10	; 16
+ 136:	87 bb       	out	0x17, r24	; 23
+		SETBIT(DDRB,5);   //MOSI
+ 138:	87 b3       	in	r24, 0x17	; 23
+ 13a:	80 62       	ori	r24, 0x20	; 32
+ 13c:	87 bb       	out	0x17, r24	; 23
+		SETBIT(DDRB,7);	  //sck
+ 13e:	87 b3       	in	r24, 0x17	; 23
+ 140:	80 68       	ori	r24, 0x80	; 128
+ 142:	87 bb       	out	0x17, r24	; 23
+		CLEARBIT(DDRB,6);	//MISO
+ 144:	87 b3       	in	r24, 0x17	; 23
+ 146:	8f 7b       	andi	r24, 0xBF	; 191
+ 148:	87 bb       	out	0x17, r24	; 23
+		
+		SETBIT(PORTB,4);
+ 14a:	88 b3       	in	r24, 0x18	; 24
+ 14c:	80 61       	ori	r24, 0x10	; 16
+ 14e:	88 bb       	out	0x18, r24	; 24
+		
+		SETBIT(SPCR,MSTR);
+ 150:	8d b1       	in	r24, 0x0d	; 13
+ 152:	80 61       	ori	r24, 0x10	; 16
+ 154:	8d b9       	out	0x0d, r24	; 13
+ 156:	11 c0       	rjmp	.+34     	; 0x17a <SPI_VidInt+0x4c>
+	}
+	else if(mode == SLAVE)
+ 158:	81 30       	cpi	r24, 0x01	; 1
+ 15a:	79 f4       	brne	.+30     	; 0x17a <SPI_VidInt+0x4c>
+	{
+		CLEARBIT(DDRB,4);   //SS
+ 15c:	87 b3       	in	r24, 0x17	; 23
+ 15e:	8f 7e       	andi	r24, 0xEF	; 239
+ 160:	87 bb       	out	0x17, r24	; 23
+		CLEARBIT(DDRB,5);   //MOSI
+ 162:	87 b3       	in	r24, 0x17	; 23
+ 164:	8f 7d       	andi	r24, 0xDF	; 223
+ 166:	87 bb       	out	0x17, r24	; 23
+		CLEARBIT(DDRB,7);	  //sck
+ 168:	87 b3       	in	r24, 0x17	; 23
+ 16a:	8f 77       	andi	r24, 0x7F	; 127
+ 16c:	87 bb       	out	0x17, r24	; 23
+		SETBIT(DDRB,6);	     //MISO
+ 16e:	87 b3       	in	r24, 0x17	; 23
+ 170:	80 64       	ori	r24, 0x40	; 64
+ 172:	87 bb       	out	0x17, r24	; 23
+		
+		CLEARBIT(SPCR,MSTR);
+ 174:	8d b1       	in	r24, 0x0d	; 13
+ 176:	8f 7e       	andi	r24, 0xEF	; 239
+ 178:	8d b9       	out	0x0d, r24	; 13
+	}
+	
+	SETBIT(SPCR,SPE);
+ 17a:	8d b1       	in	r24, 0x0d	; 13
+ 17c:	80 64       	ori	r24, 0x40	; 64
+ 17e:	8d b9       	out	0x0d, r24	; 13
+ 180:	08 95       	ret
+
+00000182 <SPI_TransRec>:
+}
+
+char SPI_TransRec(char data)
+{
+	SPDR = data;
+ 182:	8f b9       	out	0x0f, r24	; 15
+	while(!READBIT(SPSR,SPIF));
+ 184:	77 9b       	sbis	0x0e, 7	; 14
+ 186:	fe cf       	rjmp	.-4      	; 0x184 <SPI_TransRec+0x2>
+	return SPDR;
+ 188:	8f b1       	in	r24, 0x0f	; 15
+}
+ 18a:	08 95       	ret
+
+0000018c <_exit>:
+ 18c:	f8 94       	cli
+
+0000018e <__stop_program>:
+ 18e:	ff cf       	rjmp	.-2      	; 0x18e <__stop_program>
